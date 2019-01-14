@@ -10,7 +10,6 @@
  */
 const express  = require('express'); // I'm okay with this dependancy due to familiarity, I am certainly leaning on it. Popular, I should consider contribution or personal rewrite
 const helmet   = require('helmet'); // I'm okay with this dependancy for now, reevaluate with time
-const bodyParser = require('body-parser'); // I'm okay with this dependancy for now, reevaluate with time
 const fs       = require('fs'); // This is exposed in two places, here, and inside of the monolith as a function pointer in the constructor
 
 const Monolith = require('./src/monolith.js'); // Compose the html, consolidate the assets, we need auto-detection on types, consider an upper abstraction that composes the monoliths and applys the rituals
@@ -67,7 +66,7 @@ const theUninitiated = new Ritual(
 		{
 			path: '/', 	page: VirtualMonolith, // If we instead pass VirtualMonolith.payload we will create unique instances between each session.
 			post: [
-				bodyParser.urlencoded({extended: false}),
+				express.urlencoded({extended: false}),
 				(req, res, next) => {
 
 					function isAlpha(str) {
