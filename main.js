@@ -18,7 +18,7 @@ const Ritual   = require('./src/ritual.js'); // Compose the apis, hotswappable, 
 const Server   = require('./src/portal.js'); // Needed a vaguely satanic name for the servers
 const Log      = require('./src/log.js'); // Adds color coding for visual feedback on status of runtime
 
-const sound    = require('./src/rituals/sound.js'); // Example of a packaged up api in a seperate file
+// const sound    = require('./src/rituals/sound.js'); // Example of a packaged up api in a seperate file
 
 /**
  * establish platform seperators, these should be used instead of guessing

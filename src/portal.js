@@ -12,7 +12,7 @@ module.exports = (sep, expressClient, ports = { http_port: 3000, https_port: 344
 
 	const http 			= require('http');
 	const https 		= require('https');
-	const mongoose  = require('mongoose');
+	// const mongoose  = require('mongoose');
 	// I remove this for pushes so my particular function and files are atleast up to interpretation
 	const creds			= require('../creds/creds.js')(sep, fs.readFileSync);
 	// This is mainly what we're after, spawning the two servers
