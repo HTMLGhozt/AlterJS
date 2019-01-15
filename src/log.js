@@ -11,12 +11,12 @@ function Log(message, color) {
 		cyan: 	 '\x1b[36m',
 		white:	 '\x1b[37m'
 	};
-	// This allows uss to print objects to a limit of a single depth
-	let arg_arr = [...arguments]
-		  .slice()
+	// This allows us to print objects to a limit of a single depth
+	const arg_arr = Array
+		  .from(arguments)
 		  .map((index) => {
 			if (typeof index === 'object') index = (
-				`\n{${
+				`{\n{${
 				Object.entries(index).map((sub_index) => {
 					return '\n\t' + sub_index[0] + ': '+ sub_index[1]
 					})
@@ -25,7 +25,7 @@ function Log(message, color) {
 
 		return index;
 	});
-	let possible_color = arg_arr.pop(); // TODO || Possible color should not be popped and allowed to stay in arg_arr
+	const possible_color = arg_arr.pop(); // TODO || Possible color should not be popped and allowed to stay in arg_arr
 	// I am adding another parameter to suit this as a required value
 	console.log((colors[possible_color]||possible_color), ...arg_arr, colors['clear']);
 };
@@ -33,6 +33,6 @@ function Log(message, color) {
 
 /**
  *	Single depth object inspection prevents recursion
-*	Log('stuff here', [1,2,3,4,5], new Set(), {body: 'asdasdasd', scripts: { init: { asd:'asdasd' } } }, 'and more stuff here', 'green');
+ *	Log('stuff here', [1,2,3,4,5], new Set(), {body: 'asdasdasd', scripts: { init: { asd:'asdasd' } } }, 'and more stuff here', 'green');
 */
 module.exports = Log;
