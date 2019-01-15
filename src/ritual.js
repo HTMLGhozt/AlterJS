@@ -12,7 +12,6 @@ class Ritual
 	) {
 		this.pages = pages;
 		for (let pageIndex = 0; pageIndex < this.pages.length; pageIndex++) {
-
 			// For each of the api's we handle their keys to represent express.Router's
 			let {
 				path	= '',
