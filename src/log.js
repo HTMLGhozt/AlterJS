@@ -13,7 +13,7 @@ function Log(message, color) {
 
 	const arg_arr = Array.from(arguments).map((index) => {
 			if (typeof index === 'object') index = (
-				`{\n{${
+				`\n{${
 				Object.entries(index).map((sub_index) => {
 					return '\n\t' + sub_index[0] + ': '+ sub_index[1]
 					})
