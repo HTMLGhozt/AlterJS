@@ -1,5 +1,5 @@
 const mongoose   = require('mongoose');
-const bodyParser = require('body-parser');
+const express = require('express');
 const bcrypt     = require('bcrypt');
 
 const Log	 = require('../log.js');
@@ -23,7 +23,7 @@ const User = mongoose.model('user', UserSchema);
 module.exports = {
 	path: '/',
 	post: [
-		bodyParser.urlencoded({
+		express.urlencoded({
 			extended: false
 		}),
 		(req, res, next) => {
