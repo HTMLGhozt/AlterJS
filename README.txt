@@ -3,16 +3,12 @@ This is a boilerplate for people who hate frameworks, and the webpackers who und
 present an unnessisary risk that should be minimized in the browser. The content of main is for testing
 as I develop its capabiitys and demonstrating the latest compositional abilitys.
 
-To immediate access a mongodb instance for your own feature development integrating a db I have only commented
-out one that I was using in this codebase. I have not uploaded my auth but bcrypt is available aswell.
-
-The only difference in execution is to have another terminal to run `npm run db` before `npm run test`.
-Otherwise you only need the later.
-
 As its setup at this moment I present an example of offering arbitrary html file editing between multiple users.
 A way to edit unique instances is described as a very small difference in the code.
 I would like to discuss and argue the merits of paths to take here out regarding the protection of this endpoint
 and how it can be better composed or packages.
+
+All one needs to do to start up the simple demo is `npm i && npm test`.
 
 Changelog:
   Pushed what I'v got so far after borking the original project files with an install of LLVM. -_-
@@ -30,3 +26,9 @@ Changelog:
   having wanted to clean up the image import as it was left in a test state. A new file is being composed to
   handle the decomposition of a payload to a monolith instance. Some wording in the readme was outdated and
   pruned. Thanks goto Christopher Wheeler for pointing this out. <3
+  01-14-19 - I spent the day deciding on a strategy for sacrifice.js and ended up using tools from regex,
+  array.splice for mutative substraction, and slice for substring selection. Two suprise PRs from HTMLGhozt,
+  many thanks to you good sir and welcome aboard! It inspires me to enjoy this project again. He was able to
+  identify that Express has yet again changed its mind what is part of its library and what isn't. I can only
+  laugh but this is a good thing as it removes a direct dependancy. I also elected to remove bcrypt for the time
+  as its not being directly depended on but much like the express team, we'll see how long that lasts.

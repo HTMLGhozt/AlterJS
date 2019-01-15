@@ -4,7 +4,7 @@
   "description": "see README at https://github.com/etisdew/AlterJS",
   "main": "main.js",
   "scripts": {
-    "test": "nodemon ./main.js",
+    "test": "node ./main.js",
     "db": "mongod --dbpath=data/"
   },
   "repository": {
