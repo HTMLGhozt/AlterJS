@@ -33,4 +33,5 @@ function grepField(pathToFile) {
   return extracted;
 };
 
-console.log(grepField(`${__dirname}\\test.html`));
+module.exports = grepField;
+// console.log(grepField(`${__dirname}\\test.html`));

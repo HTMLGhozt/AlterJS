@@ -7,7 +7,7 @@ class Monolith
 		filepath: null,
 		title:	  null,
 		head:	  null,
-		styles:	  null,
+		style:	  null,
 		body:	  null,
 		scripts:  null
 	}, init, fs) {
@@ -15,14 +15,14 @@ class Monolith
 			filepath = __dirname,
 			title    = '',
 			head     = '',
-			styles   = '',
+			style   = '',
 			body     = '',
 			scripts  = ''
 		} = props;
 		this.filepath	= filepath;
 		this.title		= title;
 		this.head			= head;
-		this.styles		= styles;
+		this.style		= style;
 		this.body			= body;
 		this.scripts	= scripts;
 
@@ -78,7 +78,7 @@ class Monolith
 		<title>${this.title}</title>${
 			!!this.head    ? '\n\t\t' + this.head : ''
 		}${
-			!!this.styles  ? `\n\t\t<style>\n${this.styles}\n\t\t</style>` : ''
+			!!this.style  ? `\n\t\t<style>\n${this.style}\n\t\t</style>` : ''
 		}
 	</head>
 	<body>${
@@ -94,7 +94,7 @@ class Monolith
 		filepath: null,
 		title: 	  null,
 		head:	  	null,
-		styles:	  null,
+		style:	  null,
 		body:	  	null,
 		scripts:  null,
 	}, append = false, initToHTML = true) {

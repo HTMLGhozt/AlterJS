@@ -5,6 +5,7 @@ const fs       = require('fs');
 const Monolith = require('./src/monolith.js');
 const Alter    = require('./src/alter.js');
 const Ritual   = require('./src/ritual.js');
+const Sacrifice= require('./src/sacrifice.js');
 const Server   = require('./src/portal.js');
 const Log      = require('./src/log.js');
 
@@ -23,7 +24,11 @@ const RootedMonolith = new Monolith({
 	filepath:	`${__dirname}`,
 	title: 		'test',
 }, false, fs);
-RootedMonolith.read(pathHandler(__dirname,'src','assets','style.css'), 'styles', true);
+// RootedMonolith.read(pathHandler(__dirname,'src','assets','style.css'), 'styles', true);
+// RootedMonolith.write(sep);
+RootedMonolith.reassign(Sacrifice(`${__dirname}\\test.html`), false, true);
+// RootedMonolith.initToHTML();
+console.log(RootedMonolith);
 
 const VirtualMonolith = new Monolith(RootedMonolith, true);
 VirtualMonolith.reassign({ body: Alter(VirtualMonolith) }, true);
