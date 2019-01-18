@@ -9,7 +9,7 @@ class Monolith
 		head:	  null,
 		style:	  null,
 		body:	  null,
-		scripts:  null
+		script:  null
 	}, init, fs) {
 		let {
 			filepath = __dirname,
@@ -17,14 +17,14 @@ class Monolith
 			head     = '',
 			style   = '',
 			body     = '',
-			scripts  = ''
+			script  = ''
 		} = props;
 		this.filepath	= filepath;
 		this.title		= title;
 		this.head			= head;
 		this.style		= style;
 		this.body			= body;
-		this.scripts	= scripts;
+		this.script	  = script;
 
 		if (!!fs) {
 			this.images = [];
@@ -39,7 +39,7 @@ class Monolith
 				let outputPath = (
 					(typeof overridePath === 'string')
 					? overridePath
-					: `${this.filepath}${sep}${this.title}.html`
+					: `${this.filepath}${sep}src${sep}dist${sep}${this.title}.html`
 				);
 				if (typeof this.payload === 'string') {
 					fs.writeFileSync(outputPath, this.payload);
@@ -76,7 +76,7 @@ class Monolith
 <html>
 	<head>
 		<title>${this.title}</title>${
-			!!this.head    ? '\n\t\t' + this.head : ''
+			!!this.head    ? '\n\t\t' + this.head.trim() : ''
 		}${
 			!!this.style  ? `\n\t\t<style>\n${this.style}\n\t\t</style>` : ''
 		}
@@ -84,7 +84,7 @@ class Monolith
 	<body>${
 			!!this.body    ? '\n\t\t' + this.body	 : ''
 		}${
-			!!this.scripts ? `\n\t\t<script>\n${this.scripts}\n\t\t</script>` : ''
+			!!this.script ? `\n\t\t<script>\n${this.script}\n\t\t</script>` : ''
 		}
 	</body>
 </html>
@@ -96,7 +96,7 @@ class Monolith
 		head:	  	null,
 		style:	  null,
 		body:	  	null,
-		scripts:  null,
+		script:  null,
 	}, append = false, initToHTML = true) {
 		const ownedProps = Object.keys(props);
 		for (let ownedKey = 0; ownedKey < ownedProps.length; ownedKey++) {

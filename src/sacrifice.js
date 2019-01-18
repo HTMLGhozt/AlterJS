@@ -6,13 +6,12 @@ function grepField(pathToFile) {
   function sliceWithRegex(memRef, type) {
     let openIndex = null;
     let closeIndex = null;
-    let tagExpOpen  = `<${type}>`;
+    let tagExpOpen  = `<${type}`;
     let tagExpClose = `</${type}>`;
     let sampleSet = memRef.payload.join('')
     let tagRegexOpen  = new RegExp(tagExpOpen ).exec(sampleSet);
     let tagRegexClose = new RegExp(tagExpClose).exec(sampleSet);
-    // This does not allow for attributes to be present on the element itself, regex can expand this to the closing character.
-    // The only attr I could see as valid in these instances would be script sources so as that would be contrary to motive, I'll pass.
+
     if (tagRegexOpen) openIndex = tagRegexOpen.index;
     if (tagRegexClose) closeIndex = tagRegexClose.index + type.length + 3;
     if (typeof openIndex == 'number' && typeof closeIndex == 'number') {
@@ -34,4 +33,3 @@ function grepField(pathToFile) {
 };
 
 module.exports = grepField;
-// console.log(grepField(`${__dirname}\\test.html`));
