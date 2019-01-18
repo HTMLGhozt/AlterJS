@@ -76,7 +76,7 @@ class Monolith
 <html>
 	<head>
 		<title>${this.title}</title>${
-			!!this.head    ? '\n\t\t' + this.head.trim() : ''
+			!!this.head    ? this.head.trim() : ''
 		}${
 			!!this.style  ? `\n\t\t<style>\n${this.style}\n\t\t</style>` : ''
 		}

@@ -26,10 +26,10 @@ const RootedMonolith = new Monolith({
 }, false, fs);
 
 // RootedMonolith.write(sep);
-// RootedMonolith.read(pathHandler(__dirname,'src','assets','style.css'), 'styles');
 RootedMonolith.reassign(Sacrifice(pathHandler(__dirname, 'src', 'dist', 'test.html')));
-// Perform your reads first unless you want to overwrite your sacrifice
+// RootedMonolith.read(pathHandler(__dirname,'src','assets','style.css'), 'style');
 // RootedMonolith.read(pathHandler(__dirname,'src','assets','iframe.html'), 'body', true, false);
+// Perform your reads first unless you want to overwrite your sacrifice
 // RootedMonolith.write(sep);
 
 // TODO Control structure to automate common interactions

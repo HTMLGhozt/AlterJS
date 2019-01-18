@@ -30,7 +30,7 @@
 	  padding: 0;
 	  height:  12px;
 	  width:   120px;
-
+    font-size: 0.2rem;
     color: #ffffff;
     background: #404552;
 	}
@@ -38,11 +38,11 @@
   #edit textarea:focus {
 	  height:  400px;
 	  width:   400px;
-
-	  transition: all 1s;
+		font-size: 12px;
+	  transition: all 0.3s;
   }
 
   #edit input {
 	  height: 20px;
-	  width: 124px;
+	  min-width: 124px;
   }
