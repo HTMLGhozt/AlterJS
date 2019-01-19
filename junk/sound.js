@@ -1,8 +1,8 @@
-const mongoose   = require('mongoose');
-const bodyParser = require('body-parser');
-const bcrypt     = require('bcrypt');
+const mongoose = require('mongoose');
+const express  = require('express');
+const bcrypt   = require('bcrypt');
 
-const Log	 = require('../log.js');
+const Log	 = require('../src/log.js');
 
 const UserSchema = mongoose.Schema({
 	_id: mongoose.Schema.Types.ObjectId,
@@ -23,7 +23,7 @@ const User = mongoose.model('user', UserSchema);
 module.exports = {
 	path: '/',
 	post: [
-		bodyParser.urlencoded({
+		express.urlencoded({
 			extended: false
 		}),
 		(req, res, next) => {
