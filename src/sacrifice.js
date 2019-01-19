@@ -6,16 +6,16 @@ function grepField(pathToFile) {
   function sliceWithRegex(memRef, type) {
     let openIndex = null;
     let closeIndex = null;
-    let tagExpOpen  = `<${type}`;
-    let tagExpClose = `</${type}>`;
-    let sampleSet = memRef.payload.join('')
-    let tagRegexOpen  = new RegExp(tagExpOpen ).exec(sampleSet);
-    let tagRegexClose = new RegExp(tagExpClose).exec(sampleSet);
+    const tagExpOpen  = `<${type}`;
+    const tagExpClose = `</${type}>`;
+    const sampleSet = memRef.payload.join('')
+    const tagRegexOpen  = new RegExp(tagExpOpen ).exec(sampleSet);
+    const tagRegexClose = new RegExp(tagExpClose).exec(sampleSet);
 
     if (tagRegexOpen) openIndex = tagRegexOpen.index;
     if (tagRegexClose) closeIndex = tagRegexClose.index + type.length + 3;
     if (typeof openIndex == 'number' && typeof closeIndex == 'number') {
-      let sampleDecomposition = memRef.payload
+      const sampleDecomposition = memRef.payload
         .splice(openIndex, closeIndex - openIndex)
         .slice(type.length + 2, -(type.length + 3));
 

@@ -1,79 +1,57 @@
-const express  = require('express');
-const helmet   = require('helmet');
-const fs       = require('fs');
+const express   = require('express');
+const helmet    = require('helmet');
+const fs        = require('fs');
 
-const Monolith = require('./src/monolith.js');
-const Alter    = require('./src/alter.js');
-const Ritual   = require('./src/ritual.js');
-const Sacrifice= require('./src/sacrifice.js');
-const Server   = require('./src/portal.js');
-const Log      = require('./src/log.js');
+const Monolith  = require('./src/monolith.js');
+const Ritual    = require('./src/ritual.js');
+const Server    = require('./src/portal.js');
 
-function pathHandler(foldersAndFileArgs) {
-	let sep = (process.platform === 'win32' ? '\\' : '/');
+const sacrifice = require('./src/sacrifice.js');
+const alter     = require('./src/alter.js');
+const log       = require('./src/log.js');
+
+const ports = { http_port: 3000, https_port: 3443 };
+const sep   = (process.platform === 'win32' ? '\\' : '/');
+function normalizePath(foldersAndFileArgs) {
+	const sep = (process.platform === 'win32' ? '\\' : '/');
 	return Array.from(arguments).join(sep);
-};
-
-const sep = process.platform === 'win32' ? '\\' : '/';
-const ports = {
-	http_port: 3000,
-	https_port: 3443
 };
 
 const RootedMonolith = new Monolith({
 	filepath:	`${__dirname}`,
 	title: 		'test',
+	...sacrifice(normalizePath(__dirname, 'src', 'dist', 'test.html'))
 }, false, fs);
-
-// RootedMonolith.write(sep);
-RootedMonolith.reassign(Sacrifice(pathHandler(__dirname, 'src', 'dist', 'test.html')));
-// RootedMonolith.read(pathHandler(__dirname,'src','assets','style.css'), 'style');
-// RootedMonolith.read(pathHandler(__dirname,'src','assets','iframe.html'), 'body', true, false);
-// Perform your reads first unless you want to overwrite your sacrifice
-// RootedMonolith.write(sep);
-
-// TODO Control structure to automate common interactions
-// Reset button for reread from source
-// Spawn input field to be ammended to scripts
-// User levels
-// Procedural Naming for urls and avoiding collisions
-// as long as username is unique and leveleraged here either as a directory or subdomain or
-// concatonation
-// save by export
-// warning one has not save in a while
-// allowing drafts
-// api updating
-// frontend library and webpack endpoint or curated prebundled version of react
-// in runtime monolith creation
-// batch actions against many instances
-
+// RootedMonolith.read(normalizePath(__dirname, 'src', 'assets', 'main.css'), 'style', false, false);
+// RootedMonolith.read(normalizePath(__dirname, 'src', 'assets', 'alter-style.css'), 'style', true, true);
 const VirtualMonolith = new Monolith(RootedMonolith, true);
-VirtualMonolith.reassign({ body: Alter(VirtualMonolith) }, true);
+
+VirtualMonolith.reassign({ body: alter(VirtualMonolith) }, true, true);
 
 const theUninitiated = new Ritual(
 	[
 		{
-			path: '/', 	page: VirtualMonolith, // If we instead pass VirtualMonolith.payload we will create unique instances between each session.
+			path: '/', 	page: VirtualMonolith,
 			post: [
 				express.urlencoded({extended: false}),
 				(req, res, next) => {
 
-					function isAlpha(str) {
+					const isAlpha = (str) => {
 						for (let i = 0; i < str.length; i++) {
 							let code = str.charCodeAt(i);
 							if (!(code > 64 && code < 91) && !(code > 96 && code < 123)) return false;
-						} return true;
+						} return str.length < 24;
 					};
 
 					if (isAlpha(req.body.title)) {
 						VirtualMonolith.reassign(req.body);
-						RootedMonolith.reassign(req.body, false, true);
-						VirtualMonolith.reassign({ body: Alter(VirtualMonolith) }, true, true);
+						RootedMonolith .reassign(req.body, false, true);
+						RootedMonolith .write(sep);
+						VirtualMonolith.reassign({ body: alter(VirtualMonolith) }, true, true);
 						res.status(200).send(VirtualMonolith.payload);
-						RootedMonolith.write(sep);
 					} else {
+						log('You may only assign an alphabetic path.', 'red');
 						res.end();
-						Log('You may only assign an alphabetic path.', 'red');
 					};
 				}
 			]

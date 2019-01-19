@@ -1,6 +1,4 @@
 // const mongoose = require('mongoose');
-const fs       = require('fs');
-const Log      = require('./log.js');
 
 module.exports = (sep, expressClient, ports = { http_port: 3000, https_port: 3443, db_port: null }) => {
 	const {
@@ -10,9 +8,11 @@ module.exports = (sep, expressClient, ports = { http_port: 3000, https_port: 344
 	} = ports;
 
 	// const mongoose  = require('mongoose');
-	const http 			= require('http');
-	const https 		= require('https');
-	const creds			= require('../creds/creds.js')(sep, fs.readFileSync);
+	const fs    = require('fs');
+	const Log   = require('./log.js');
+	const http 	= require('http');
+	const https = require('https');
+	const creds = require('../creds/creds.js')(sep, fs.readFileSync);
 	const httpServer  = http.createServer (expressClient);
 	const httpsServer = https.createServer(creds, expressClient);
 	const announce 		= (port) => { Log(`accepting requests on port: ${port}`, 'blue'); };
