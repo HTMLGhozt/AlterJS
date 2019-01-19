@@ -75,18 +75,15 @@ class Monolith
 `<!DOCTYPE html>
 <html>
 	<head>
-		<title>${this.title}</title>
-		${
-			!!this.head    ? this.head.trim() : ''
-		}${
-			!!this.style  ? `\n\t\t<style>\n${this.style}\n\t\t</style>` : ''
-		}
+		<title>${this.title}</title>${
+		!!this.head ? `\n\t\t${this.head.trim()}`
+		: ''}${
+		!!this.style ? `\n\t\t<style>\n${this.style.trim()}\n\t\t</style>`
+		: ''}
 	</head>
-	<body>${
-			!!this.body    ? '\n\t\t' + this.body	 : ''
-		}${
-			!!this.script ? `\n\t\t<script>\n${this.script}\n\t\t</script>` : ''
-		}
+	<body>${!!this.body ? `\n\t\t${this.body.trim()}`
+		: ''}${
+		!!this.script ? `\n\t\t<script>\n${this.script.trim()}\n\t\t</script>` : ''}
 	</body>
 </html>
 `	);};
@@ -103,7 +100,7 @@ class Monolith
 		for (let ownedKey = 0; ownedKey < ownedProps.length; ownedKey++) {
 			let accessKey = ownedProps[ownedKey];
 			let flag = (typeof props[accessKey] === 'string');
-			if (!!append) this[accessKey] += (!!flag ? props[accessKey] : '');
+			if (!!append) this[accessKey] += (!!flag ? '\n' + props[accessKey] : '');
 			else {
 				// Overwrite the content completely
 				this[accessKey] = (!!flag ? props[accessKey] : this[accessKey]);
